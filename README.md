@@ -15,8 +15,9 @@ We chose the **Hawaii Google Maps Reviews** dataset. We chose it because it cont
 This question is useful because business responses can show customer engagement. We can compare response behavior across review rating, review length, business category, price level, and number of reviews.
 
 The first dataset, reviews, contains 1504347 rows, referring to 1504347 unique reviews, with 8 columns recording the following information:
+
 | Column | Description |
-| --- | --- |
+| ------ | ----------- |
 | `user_id` | ID of the reviewer |
 | `name` | name of the reviewer |
 | `time` | time of the review (unix time) |
@@ -25,6 +26,7 @@ The first dataset, reviews, contains 1504347 rows, referring to 1504347 unique r
 | `pics` | pictures of the review |
 | `resp` | business response to the review including unix time and text of the response |
 | `gmap_id` | ID of the business |
+
 ## Overview
 
 ## Overview
