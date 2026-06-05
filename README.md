@@ -4,15 +4,22 @@
 
 **Website Link**: https://weiym-dot.github.io/Business-Response-to-Customer-Reviews/
 
-## Overview
-
 ## Introduction
 
 ### Dataset Chosen
 
-We chose the **Hawaii Google Maps Reviews** dataset. We chose it because it contains both customer reviews and business responses. This lets us study customer-business interaction, not just ratings. Our main question is: **What factors appear related to whether businesses respond and how quickly they respond?**
+For this project, we used the **Hawaii Google Maps Reviews** dataset. This dataset includes cutomer reviews for businesses in Hawaii, along with information about the businesses themselves. We chose it because it contains both customer reviews and business responses. This lets us study customer-business interaction, not just ratings. 
+Our main question is: 
+**What factors appear related to whether businesses respond and how quickly they respond?**
 
-This question is useful because business responses can show customer engagement. We can compare response behavior across review rating, review length, business category, price level, and number of reviews.
+This question is useful because business responses can show customer engagement. When a business responds to reviews, it may be trying to manage reputation, thank customers, or fix problems. By studying response behavior, we can better understand what kinds of reviews are more likely to receive attention from businesses.
+
+We can compare response behavior across review rating, review length, business category, price level, and number of reviews.
+
+We used two datasets:
+
+- `review-Hawaii_10.json`: contains customer review information.
+- `meta-Hawaii.json`: contains business information.
 
 The first dataset, reviews, contains 1504347 rows, referring to 1504347 unique reviews, with 8 columns recording the following information:
 
@@ -47,7 +54,12 @@ The second dataset, meta, contains 21507 rows, indicating that information from 
 | `relative_results` | relative businesses recommended by Google |
 | `url` | URL of the business |
 
+## Data Cleaning and Exploratory Data Analysis
 
-## Overview
+### Data Cleaning
 
-## Overview
+To make the dataset easier to use, we cleaned and combined the review data with the business metadata.
+
+First, we renamed `avg_rating` to `business_avg_rating` so it would not be confused with the customer review rating. Then, we kept only the columns that were useful for our question. From the review dataset, we kept columns such as `gmap_id`, `time`, `rating`, `text`, `resp`, and `pics`. From the business metadata, we kept columns such as `gmap_id`, `category`, `business_avg_rating`, `num_of_reviews`, `price`, and `state`.
+
+Next, we merged the two datasets using `gmap_id`. This allowed each review to also include information about the business it belonged to.
