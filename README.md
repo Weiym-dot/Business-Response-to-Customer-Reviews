@@ -2,7 +2,7 @@
 
 **Name(s)**: May Wang, Yimeng Wei
 
-**Website Link**: (your website link)
+**Website Link**: https://weiym-dot.github.io/Business-Response-to-Customer-Reviews/
 
 ## Overview
 
@@ -26,6 +26,27 @@ The first dataset, reviews, contains 1504347 rows, referring to 1504347 unique r
 | `pics` | pictures of the review |
 | `resp` | business response to the review including unix time and text of the response |
 | `gmap_id` | ID of the business |
+
+The second dataset, meta, contains 21507 rows, indicating that information from 21507 businesses are collected here, with 15 columns including:
+
+| Column | Description |
+| ------ | ----------- |
+| `name` | name of the business |
+| `address` | address of the business |
+| `gmap_id` | ID of the business |
+| `description` | description of the business |
+| `latitude` | latitude of the business |
+| `longitude` | longitude of the business |
+| `category` | category of the business |
+| `avg_rating` | average rating of the business |
+| `num_of_reviews` | number of reviews |
+| `price` | price of the business |
+| `hours` | open hours |
+| `MISC` | MISC information |
+| `state` | the current status of the business, such as permanently closed |
+| `relative_results` | relative businesses recommended by Google |
+| `url` | URL of the business |
+
 
 ## Overview
 
