@@ -74,7 +74,7 @@ To make the dataset easier to use, we cleaned and combined the review data with 
 
 8. We also calculated `response_delay_hours`. This column measures how many hours passed between the review time and the business response time. This helps us study how quickly businesses responded when they did respond.
 
-9. e created some review-level features. We made a `has_text` column to show whether a review had written text. We also made a `has_pics` column to show whether a review had pictures. For reviews with missing text, we filled the text with an empty string. Then, we created `text_length`, which counts how many characters are in each review. This may be useful because longer reviews may be more detailed and may be more likely to get a response.
+9. We created some review-level features. We made a `has_text` column to show whether a review had written text. We also made a `has_pics` column to show whether a review had pictures. For reviews with missing text, we filled the text with an empty string. Then, we created `text_length`, which counts how many characters are in each review. This may be useful because longer reviews may be more detailed and may be more likely to get a response.
 
 9. We also cleaned the business information. The `category` column contained lists of categories, so we created a simpler column called `main_category` by taking the first category from each list. Considering these's a lot of missing data in this column and future usage, we replace missing data with 'Unknown'. We also converted the `price` column into a numeric `price_level`. For example, a business with `"$$"` was given a price level of 2.
 
