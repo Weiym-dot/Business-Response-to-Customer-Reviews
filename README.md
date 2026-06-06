@@ -185,6 +185,7 @@ Alternative hypothesis: The distribution of review ratings is different for revi
   height="400"
   frameborder="0"
 ></iframe> 
+
 We used total variation distance, or TVD, as the test statistic. We found an observed TVD of 0.0475 which has a p value of 0.0. Since the p-value was less than 0.05, we rejected the null hypothesis. This suggests that the missingness of `response_delay_hours` depends on review rating.
 <iframe
   src="assets/Permutation Distribution of TVD.html"
@@ -192,6 +193,31 @@ We used total variation distance, or TVD, as the test statistic. We found an obs
   height="400"
   frameborder="0"
 ></iframe> 
+
+#### Response Delay Missingness vs. Number of Reviews
+
+Null hypothesis: The missingness of `response_delay_hours` is independent of `num_of_reviews`.
+
+Alternative hypothesis: The missingness of `response_delay_hours` depends on `num_of_reviews`.
+
+Because `num_of_reviews` was highly right-skewed, we used `log_num_reviews = log(1 + num_of_reviews)`. This reduced the effect of extreme values.
+<iframe
+  src="assets/Log Number of Reviews by Response Delay Missingness.html"
+  width="800"
+  height="400"
+  frameborder="0"
+></iframe> 
+We ran a permutation test by shuffling the missingness of rating for 1000 times to collect 1000 simulating mean differences in the two distributions as described in the test statistic.
+<iframe
+  src="assets/Permutation Distribution of Difference in Means.html"
+  width="800"
+  height="400"
+  frameborder="0"
+></iframe> 
+We used the absolute difference in mean `log_num_reviews` between the missing and observed groups as the test statistic. Since the p-value was less than 0.05, we rejected the null hypothesis. This suggests that response delay missingness depends on the number of reviews a business has.
+
+Together, these results suggest that the missingness of `response_delay_hours` is not MCAR, because it depends on observed columns in the dataset.
+
 ## Hypothesis Testing
 
 For our hypothesis test, we asked:
@@ -209,3 +235,47 @@ Test statistic: The response rate for low-rated reviews minus the response rate 
 We used a permutation test to simulate the distribution of the test statistic under the null hypothesis. The p-value was 0.0, which is less than the significance level of 0.05. Therefore, we rejected the null hypothesis.
 
 This gives evidence that businesses respond to low-rated reviews more often than high-rated reviews. This result makes sense because low-rated reviews may hurt a business’s reputation, so businesses may be more motivated to respond to them.
+
+## Framing a Prediction Problem
+
+Our prediction problem is:
+
+**Can we predict whether a business will respond to a customer review based on information available when the review is posted?**
+
+This is a binary classification problem. The response variable is `has_response`, which has two possible values:
+
+- `1`: the business responded.
+- `0`: the business did not respond.
+
+This prediction task is useful because it helps us understand what factors are related to business engagement. It can also show which kinds of reviews are more likely to get attention from businesses.
+
+We use the F1-score as our main evaluation metric. The dataset is imbalanced because most reviews do not receive responses. In this case, accuracy alone can be misleading. A model may have high accuracy just by predicting the majority class. The F1-score is better because it balances precision and recall.
+
+At the time of prediction, we assume we know information that is available when the review is posted. These features include:
+
+- `rating`
+- `review_hour`
+- `main_category`
+- `price_level`
+- `num_of_reviews`
+- `review_when_weekend`
+
+These features are appropriate because they are known before the business chooses whether to respond.
+
+## Baseline Model
+
+For our baseline model, we used a Random Forest Classifier to predict `has_response`.
+
+The baseline model used three features:
+
+- `rating`
+- `review_hour`
+- `num_of_reviews`
+
+Among these features, `rating` is ordinal, while `review_hour` and `num_of_reviews` are quantitative. Since all three features are already numeric, no encoding was needed.
+
+We chose these features because they are available when the review is posted and may be related to response behavior. Low ratings may motivate a business to respond. Businesses with many reviews may have stronger review-management systems. The hour of the review may also relate to business activity patterns.
+
+The baseline model had an accuracy of **93.46%** and an F1-score of **0.358** on the test set. The accuracy looks high, but the recall was only **0.252**. This means the model only found about 25% of the reviews that actually received a response.
+
+This shows why accuracy alone is not enough. The model is good at predicting the majority class, but it misses many true responses. Therefore, there is room for improvement.
