@@ -88,21 +88,21 @@ First, we looked at the distribution of `has_response`. Most reviews did not rec
 <iframe
   src="assets/Distribution of has_reponse.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe>
 Next, we looked at `main_category` for reviews that received a response. The distribution of `main_category` shows what types of businesses appear most often in our dataset. Some categories have many more reviews than others. This means the dataset is not evenly spread across all business types. For example, common categories such as restaurants, hotels, or shopping places may appear more often because people are more likely to review them on Google Maps. This is important because our results may be influenced more by the larger categories.
 <iframe
   src="assets/Distribution of Main Category.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe>
 We also looked at the distribution of customer `rating`. Most reviews had high ratings, especially 5-star reviews. This matters because businesses may respond differently to very positive reviews compared to very negative reviews.
 <iframe
   src="assets/Distribution of ratings.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe>
 
@@ -113,14 +113,14 @@ One important relationship was between review rating and response rate. We compa
 <iframe
   src="assets/Distribution of Response Rate by Review Rating.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe>
 We also compared business average rating and response behavior. This helped us see whether lower-rated businesses respond more often, possibly because they are trying to manage their reputation.
 <iframe
   src="assets/Business average rating vs response rate.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe>
 
@@ -180,7 +180,7 @@ Alternative hypothesis: The distribution of review ratings is different for revi
 <iframe
   src="assets/rating distribution when delay missing and not missing.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe> 
 
@@ -188,7 +188,7 @@ We used total variation distance, or TVD, as the test statistic. We found an obs
 <iframe
   src="assets/Permutation Distribution of TVD.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe> 
 
@@ -209,7 +209,7 @@ We ran a permutation test by shuffling the missingness of rating for 1000 times 
 <iframe
   src="assets/Permutation Distribution of Difference in Means.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe> 
 We used the absolute difference in mean `log_num_reviews` between the missing and observed groups as the test statistic. Since the p-value was less than 0.05, we rejected the null hypothesis. This suggests that response delay missingness depends on the number of reviews a business has.
