@@ -147,3 +147,57 @@ One table grouped reviews by `main_category` and calculated the response rate an
 | Pawn shop                    | 0.888889 |      27 |
 | Venezuelan restaurant        | 0.884615 |      26 |
 | Harley-Davidson dealer       | 0.853261 |     368 |
+Another table grouped reviews by `rating` and calculated response rate, median response delay, and number of reviews. This table was useful because it directly connected review rating to both parts of our research question: whether businesses respond and how quickly they respond.
+|   rating |   response_rate |   median_response_delay_hours |   num_reviews |
+|---------:|----------------:|------------------------------:|--------------:|
+|        1 |       0.10767   |                       38.8686 |         33157 |
+|        2 |       0.0916166 |                       43.5983 |         37133 |
+|        3 |       0.0606261 |                       51.7601 |        157325 |
+|        4 |       0.0647835 |                       52.844  |        389389 |
+|        5 |       0.0756289 |                       51.9512 |        888007 |
+
+## Assessment of Missingness
+Several columns in the dataset have missing values, including `pics`, `price_level`, `response_time`, `response_text`, `response_datetime`, and `response_delay_hours`.
+
+### NMAR Analysis
+
+One column that may be **NMAR** is `price_level`. This is because the missingness may depend on the actual price level itself. For example, some expensive businesses may choose not to display price information because their prices are high or difficult to summarize. In this case, the reason the value is missing may depend on the missing value itself.
+
+Another column that may be NMAR is `response_delay_hours`. For reviews without a business response, response delay is missing. This missingness may depend on the true response delay. For example, reviews that would receive very late responses may be more likely to never receive a response at all. If we had more information about each business’s internal response practices, we might be able to explain this missingness using observed data.
+
+### Missingness Dependency
+
+We tested whether the missingness of `response_delay_hours` depends on other observed columns.
+
+First, we created a column called `delay_missing`, where `True` means the response delay is missing and `False` means the response delay is observed.
+
+#### Response Delay Missingness vs. Rating
+
+Null hypothesis: The missingness of `response_delay_hours` is independent of review rating.
+
+Alternative hypothesis: The distribution of review ratings is different for reviews with missing response delays and reviews with observed response delays.
+<iframe
+  src="assets/rating distribution when delay missing and not missing.html"
+  width="800"
+  height="400"
+  frameborder="0"
+></iframe>
+We used total variation distance, or TVD, as the test statistic. Since the p-value was less than 0.05, we rejected the null hypothesis. This suggests that the missingness of `response_delay_hours` depends on review rating.
+
+## Hypothesis Testing
+
+For our hypothesis test, we asked:
+
+**Do low-rated reviews receive business responses more often than high-rated reviews?**
+
+We defined low-rated reviews as reviews with ratings of 1 or 2 stars. We defined high-rated reviews as reviews with ratings of 4 or 5 stars.
+
+Null hypothesis: The probability that a business responds is independent of review rating.
+
+Alternative hypothesis: Businesses are more likely to respond to low-rated reviews than high-rated reviews.
+
+Test statistic: The response rate for low-rated reviews minus the response rate for high-rated reviews.
+
+We used a permutation test to simulate the distribution of the test statistic under the null hypothesis. The p-value was 0.0, which is less than the significance level of 0.05. Therefore, we rejected the null hypothesis.
+
+This gives evidence that businesses respond to low-rated reviews more often than high-rated reviews. This result makes sense because low-rated reviews may hurt a business’s reputation, so businesses may be more motivated to respond to them.
