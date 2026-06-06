@@ -148,6 +148,7 @@ One table grouped reviews by `main_category` and calculated the response rate an
 | Venezuelan restaurant        | 0.884615 |      26 |
 | Harley-Davidson dealer       | 0.853261 |     368 |
 Another table grouped reviews by `rating` and calculated response rate, median response delay, and number of reviews. This table was useful because it directly connected review rating to both parts of our research question: whether businesses respond and how quickly they respond.
+
 |   rating |   response_rate |   median_response_delay_hours |   num_reviews |
 |---------:|----------------:|------------------------------:|--------------:|
 |        1 |       0.10767   |                       38.8686 |         33157 |
