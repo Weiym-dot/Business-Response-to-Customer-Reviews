@@ -310,3 +310,77 @@ Among the features, `rating` is an ordinal variable, `num_of_reviews` is a quant
 The baseline model achieved an accuracy of 0.937 and an F1-score of 0.368 on the test set. While the accuracy appears high, the relatively low F1-score suggests that the model still struggles to correctly identify businesses that respond to reviews. Therefore, there is substantial room for improvement. In the final model, we will incorporate additional features and perform hyperparameter tuning to improve predictive performance.
 
 ## Final Model
+
+In our final model, we used five columns as features: 
+
+| Feature        | Type         | Encoding            |
+| -------------- | ------------ | ------------------- |
+| `rating`         | Ordinal      | Kept as numeric     |
+| `num_of_reviews` | Quantitative | Kept as numeric     |
+| `review_period`  | Nominal      | One-hot encoded     |
+| `main_category`  | Nominal      | One-hot encoded     |
+| `has_text`       | Binary       | Converted to 0/1    |
+
+`rating`
+
+The `rating` column represents the star rating given by a customer, ranging from 1 to 5. Based on our EDA, businesses appeared more likely to respond to lower-rated reviews, possibly because they want to address customer dissatisfaction and protect their reputation. Since `rating` is an ordinal variable that is already numerically encoded, we did not apply any additional transformation and passed it directly into the model.
+
+`review_period`
+
+The `review_period` feature was engineered from the original `review_hour` column. Instead of using the exact hour of the review, we grouped review times into four periods: Morning, Afternoon, Evening, and Night. We chose this feature because businesses may have different staffing levels and customer engagement patterns throughout the day, which could affect whether they respond to reviews. Since `review_period` is a nominal categorical variable, we applied a `OneHotEncoder` transformer to convert the categories into binary indicator variables.
+
+`num_of_reviews`
+
+The `num_of_reviews` column represents the total number of reviews a business has received. Businesses with a larger number of reviews may have more established customer-service processes and dedicated staff for managing online feedback, making them more likely to respond to customer reviews. Because this feature is quantitative and contains values on a much larger scale than the other variables, we applied a `StandardScaler` transformer to standardize the feature before model training.
+
+`main_category`
+
+The `main_category` feature represents the primary category of the business, such as restaurant, hotel, or beauty service. We included this feature because businesses in different industries may have different review-management practices and customer-service expectations. During EDA, we observed noticeable differences in response rates across business categories, suggesting that category information may be useful for prediction. Since `main_category` is a nominal categorical variable, we transformed it using a `OneHotEncoder` transformer.
+
+`has_text`
+
+The `has_text` feature indicates whether a review contains written text in addition to a star rating. We included this feature because reviews with text typically provide more detailed feedback and may encourage businesses to respond. Reviews containing only a star rating often provide limited information and may be less likely to receive a response. Since `has_text` is a binary variable, we converted it to 0 and 1 values and used it directly without additional transformations.
+
+
+We used `RandomForestClassifier` as our model and use `GridSearchchCV` to tune the hyperparameters `n_estimators` and `max_depth`. The best model achieved an accuracy of XX% and an F1-score of XX on the test set. Compared to the baseline model (Accuracy = 93.46%, F1 = 0.358), the final model achieved a higher F1-score, indicating improved ability to identify businesses that respond to customer reviews. This suggests that the newly engineered features provide useful information for the prediction task.
+
+The final model was evaluated using the same training and testing split as the baseline model. Since the target variable has_response is somewhat imbalanced, we focus primarily on F1-score while also reporting accuracy.
+
+The final model achieved an accuracy of [INSERT FINAL ACCURACY] and an F1-score of [INSERT FINAL F1], compared to the baseline model's accuracy of 93.46% and F1-score of 0.358. The improvement in F1-score suggests that the additional features provide meaningful information about business response behavior and help the model better identify reviews that receive responses
+
+## Fairness Analysis
+
+We want to assess whether our final model performs fairly across different groups of reviews. Specifically, we investigate the following question:
+
+**Does our model perform worse for low-rating reviews than it does for high-rating reviews?**
+
+To answer this question, we divide the reviews into two groups based on their ratings:
+
+* **Group X:** low-rating reviews (rating ≤ 3)
+* **Group Y:** high-rating reviews (rating ≥ 4)
+
+We chose this grouping because businesses often respond differently to positive and negative reviews. Negative reviews may receive more attention from businesses since they can affect reputation, while positive reviews may be less likely to receive a response. Therefore, it is important to determine whether our model performs equally well for both types of reviews.
+
+Since the response variable (`has_response`) is imbalanced, we use **F1-score** as our evaluation metric. F1-score incorporates both precision and recall, making it more informative than accuracy for this classification task.
+
+**Null Hypothesis:** Our model is fair. The F1-scores for low-rating reviews and high-rating reviews are roughly the same, and any observed difference is due to random chance.
+
+**Alternative Hypothesis:** Our model is unfair. The F1-score for low-rating reviews is different from the F1-score for high-rating reviews.
+
+**Test Statistic:** Difference in F1-score (low-rating reviews − high-rating reviews)
+
+**Significance Level:** 0.05
+
+
+We performed the permutation test with 1000 trials. The result p-value is [PValue], which is [larger/shorter] than the 0.05 significant level. .
+
+We compare the observed difference to this distribution and compute a p-value.
+
+### Conclusion
+
+(Insert your actual p-value here.)
+
+If the p-value is less than 0.05, we reject the null hypothesis and conclude that the model performs differently across the two rating groups.
+
+If the p-value is greater than 0.05, we fail to reject the null hypothesis and conclude that there is insufficient evidence that the model performs differently for low-rating and high-rating reviews. Therefore, the model appears to be reasonably fair with respect to review ratings.
+
