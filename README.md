@@ -234,7 +234,7 @@ Test statistic: The response rate for low-rated reviews minus the response rate 
 <iframe
   src="assets/Permutation Distribution of Response Rate Difference.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe> 
 We used a permutation test to simulate the distribution of the test statistic under the null hypothesis. The p-value was 0.0, which is less than the significance level of 0.05. Therefore, we rejected the null hypothesis.
