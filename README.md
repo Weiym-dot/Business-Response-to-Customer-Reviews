@@ -283,18 +283,29 @@ These features are appropriate because they are known before the business choose
 
 ## Baseline Model
 
-For our baseline model, we used a Random Forest Classifier to predict `has_response`.
+For our baseline model, we used a Random Forest Classifier and split the data into training (80% of data) and testing sets (20% of data). 
 
-The baseline model used three features:
+Response variable (y): `has_response`
 
-- `rating`
-- `review_hour`
-- `num_of_reviews`
+Primarily used features(X):
 
-Among these features, `rating` is ordinal, while `review_hour` and `num_of_reviews` are quantitative. Since all three features are already numeric, no encoding was needed.
+* `rating`
+* `review_hour`
+* `num_of_reviews`
 
-We chose these features because they are available when the review is posted and may be related to response behavior. Low ratings may motivate a business to respond. Businesses with many reviews may have stronger review-management systems. The hour of the review may also relate to business activity patterns.
+We selected these features because they are available at the time a review is posted and may reasonably influence whether a business chooses to respond. Lower ratings may motivate businesses to engage with customers, while businesses with many reviews may have more established review-management practices. The hour at which a review is posted may also be related to business activity patterns.
 
-The baseline model had an accuracy of **93.46%** and an F1-score of **0.358** on the test set. The accuracy looks high, but the recall was only **0.252**. This means the model only found about 25% of the reviews that actually received a response.
+`review_hour` seems to be a quantitative variable; but considering its representation of reveiw posted time, it's better to be treated as a categorical variable. To better represent posting time, we engineered a new feature called `review_period` from `review_hour`. Rather than treating hours as purely numerical values, we grouped them into four categories:
 
-This shows why accuracy alone is not enough. The model is good at predicting the majority class, but it misses many true responses. Therefore, there is room for improvement.
+* Morning (6–11)
+* Afternoon (12–17)
+* Evening (18–22)
+* Night (23–5)
+
+We then applied `OneHotEncoder` to this categorical feature. This transformation allows the model to capture differences between reviews posted during different parts of the day, which may be more meaningful than using the raw hour value. 
+
+Among the features, `rating` is an ordinal variable, `num_of_reviews` is a quantitative variable, and `review_period` is a nominal categorical variable that was one-hot encoded before model training.
+
+The baseline model achieved an accuracy of 0.937 and an F1-score of 0.368 on the test set. While the accuracy appears high, the relatively low F1-score suggests that the model still struggles to correctly identify businesses that respond to reviews. Therefore, there is substantial room for improvement. In the final model, we will incorporate additional features and perform hyperparameter tuning to improve predictive performance.
+
+## Final Model
