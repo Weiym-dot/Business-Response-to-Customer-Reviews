@@ -2,8 +2,6 @@
 
 **Name(s)**: May Wang, Yimeng Wei
 
-**Website Link**: https://weiym-dot.github.io/Business-Response-to-Customer-Reviews/
-
 ## Introduction
 
 ### Dataset Chosen
