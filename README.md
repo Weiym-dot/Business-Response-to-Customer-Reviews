@@ -58,11 +58,29 @@ The second dataset, meta, contains 21507 rows, indicating that information from 
 
 To make the dataset easier to use, we cleaned and combined the review data with the business metadata.
 
-First, we renamed `avg_rating` to `business_avg_rating` so it would not be confused with the customer review rating. Then, we kept only the columns that were useful for our question. From the review dataset, we kept columns such as `gmap_id`, `time`, `rating`, `text`, `resp`, and `pics`. From the business metadata, we kept columns such as `gmap_id`, `category`, `business_avg_rating`, `num_of_reviews`, `price`, and `state`.
+1. We renamed `avg_rating` to `business_avg_rating` so it would not be confused with the customer review rating. 
 
-Next, we merged the two datasets using `gmap_id`. This allowed each review to also include information about the business it belonged to.
+2. We kept only the columns that were useful for our question. From the review dataset, we kept columns such as `gmap_id`, `time`, `rating`, `text`, `resp`, and `pics`. From the business metadata, we kept columns such as `gmap_id`, `category`, `business_avg_rating`, `num_of_reviews`, `price`, and `state`.
 
-We then created several new columns:
+3. We merged the two datasets using `gmap_id`. This allowed each review to also include information about the business it belonged to.
+
+4. We then created a new column called `has_response`. This column shows whether a business responded to a review. If the `resp` column was not missing, then `has_response` was `True`. If the `resp` column was missing, then `has_response` was `False`. This column is important because our main question is about whether businesses respond to customer reviews.
+
+5. The `resp` column is a column of dictionary with more than one piece of information, so we separated it into two new columns: `response_time_raw` and `response_text`. `response_time_raw` stores the time when the business responded. `response_text` stores the written response from the business. After this, we dropped the original `resp` column because the useful information had already been extracted.
+
+6. We converted the review time and response time into readable datetime values. The original time columns were stored in milliseconds, so they were hard to understand directly. We converted them into datetime format and changed them to the Hawaii time zone because the dataset is about businesses in Hawaii.
+
+7. After converting the time columns, we created several time-related features. These included `review_year`, `review_month`, `review_weekday`, `review_hour`, and `review_when_weekend`. These columns help us study whether the timing of a review is related to business response behavior.
+
+8. We also calculated `response_delay_hours`. This column measures how many hours passed between the review time and the business response time. This helps us study how quickly businesses responded when they did respond.
+
+9. e created some review-level features. We made a `has_text` column to show whether a review had written text. We also made a `has_pics` column to show whether a review had pictures. For reviews with missing text, we filled the text with an empty string. Then, we created `text_length`, which counts how many characters are in each review. This may be useful because longer reviews may be more detailed and may be more likely to get a response.
+
+9. We also cleaned the business information. The `category` column contained lists of categories, so we created a simpler column called `main_category` by taking the first category from each list. We also converted the `price` column into a numeric `price_level`. For example, a business with `"$$"` was given a price level of 2.
+
+10. Finally, we checked for unusual values in `response_delay_hours`. We found some rows where `response_delay_hours` was negative. This means the business response time happened before the review time, which does not make sense. This was probably caused by wrong timestamps or system errors. We did not remove these rows because our main goal is to study whether a business responded, not how long it took to respond. These rows still show that the business responded, so removing them could affect our response-rate analysis. However, we were careful when using `response_delay_hours` because some values were not valid.
+
+We then created following new columns:
 
 - `has_response`: whether the `resp` column was missing or not.
 - `response_time_raw`: the raw response time from the response dictionary.
@@ -77,8 +95,6 @@ We then created several new columns:
 - `text_length`: the length of the review text.
 - `main_category`: the first listed business category.
 - `price_level`: the number of dollar signs in the price column.
-
-We found some rows where `response_delay_hours` was negative. This means the business response time happened before the review time, which does not make sense. This was probably caused by wrong timestamps or system errors. We did not remove these rows because our main goal is to study whether a business responded, not how long it took to respond. These rows still show that the business responded, so removing them could affect our response-rate analysis. However, we were careful when using `response_delay_hours` because some values were not valid.
 
 ### Univariate Analysis
 
