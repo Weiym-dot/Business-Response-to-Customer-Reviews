@@ -371,5 +371,12 @@ Since the response variable (`has_response`) is imbalanced, we use **F1-score** 
 
 **Significance Level:** 0.05
 
+<iframe
+  src="assets/fairness_analysis.html"
+  width="800"
+  height="420"
+  frameborder="0"
+></iframe> 
+
 **Conclusion:** We performed the permutation test with 1000 trials. The resulting p-value was 0.0, which is below our significance level of 0.05. Therefore, we reject the null hypothesis and conclude that the model's performance is significantly different across the two groups. This suggests that the model predicts responses for weekday and weekend reviews with different levels of effectiveness. One possible explanation is that businesses may exhibit different response behaviors depending on when reviews are posted, causing the patterns learned by the model to vary across these groups. As a result, the final model may not be equally fair for all review timing groups, and future work could explore additional features or modeling approaches to reduce this disparity.
 
