@@ -174,9 +174,9 @@ First, we created a column called `delay_missing`, where `True` means the respon
 
 #### Response Delay Missingness vs. Rating
 
-Null hypothesis: The missingness of `response_delay_hours` is independent of review rating.
+**Null hypothesis:** The missingness of `response_delay_hours` is independent of review rating.
 
-Alternative hypothesis: The distribution of review ratings is different for reviews with missing response delays and reviews with observed response delays.
+**Alternative hypothesis:** The distribution of review ratings is different for reviews with missing response delays and reviews with observed response delays.
 <iframe
   src="assets/rating distribution when delay missing and not missing.html"
   width="800"
@@ -194,9 +194,9 @@ We used total variation distance, or TVD, as the test statistic. We found an obs
 
 #### Response Delay Missingness vs. Number of Reviews
 
-Null hypothesis: The missingness of `response_delay_hours` is independent of `num_of_reviews`.
+**Null hypothesis:** The missingness of `response_delay_hours` is independent of `num_of_reviews`.
 
-Alternative hypothesis: The missingness of `response_delay_hours` depends on `num_of_reviews`.
+**Alternative hypothesis:** The missingness of `response_delay_hours` depends on `num_of_reviews`.
 
 Because `num_of_reviews` was highly right-skewed, we used `log_num_reviews = log(1 + num_of_reviews)`. This reduced the effect of extreme values.
 <iframe
@@ -224,11 +224,11 @@ For our hypothesis test, we asked:
 
 We defined low-rated reviews as reviews with ratings of 1 or 2 stars. We defined high-rated reviews as reviews with ratings of 4 or 5 stars.
 
-Null hypothesis: The probability that a business responds is independent of review rating.
+**Null hypothesis:** The probability that a business responds is independent of review rating.
 
-Alternative hypothesis: Businesses are more likely to respond to low-rated reviews than high-rated reviews.
+**Alternative hypothesis:** Businesses are more likely to respond to low-rated reviews than high-rated reviews.
 
-Test statistic: The response rate for low-rated reviews minus the response rate for high-rated reviews.
+**Test statistic:** The response rate for low-rated reviews minus the response rate for high-rated reviews.
 <iframe
   src="assets/Permutation Distribution of Response Rate Difference.html"
   width="800"
