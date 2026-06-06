@@ -74,9 +74,9 @@ To make the dataset easier to use, we cleaned and combined the review data with 
 
 8. We also calculated `response_delay_hours`. This column measures how many hours passed between the review time and the business response time. This helps us study how quickly businesses responded when they did respond.
 
-9. e created some review-level features. We made a `has_text` column to show whether a review had written text. We also made a `has_pics` column to show whether a review had pictures. For reviews with missing text, we filled the text with an empty string. Then, we created `text_length`, which counts how many characters are in each review. This may be useful because longer reviews may be more detailed and may be more likely to get a response.
+9. We created some review-level features. We made a `has_text` column to show whether a review had written text. We also made a `has_pics` column to show whether a review had pictures. For reviews with missing text, we filled the text with an empty string. Then, we created `text_length`, which counts how many characters are in each review. This may be useful because longer reviews may be more detailed and may be more likely to get a response.
 
-9. We also cleaned the business information. The `category` column contained lists of categories, so we created a simpler column called `main_category` by taking the first category from each list. We also converted the `price` column into a numeric `price_level`. For example, a business with `"$$"` was given a price level of 2.
+9. We also cleaned the business information. The `category` column contained lists of categories, so we created a simpler column called `main_category` by taking the first category from each list. Considering these's a lot of missing data in this column and future usage, we replace missing data with 'Unknown'. We also converted the `price` column into a numeric `price_level`. For example, a business with `"$$"` was given a price level of 2.
 
 10. Finally, we checked for unusual values in `response_delay_hours`. We found some rows where `response_delay_hours` was negative. This means the business response time happened before the review time, which does not make sense. This was probably caused by wrong timestamps or system errors. We did not remove these rows because our main goal is to study whether a business responded, not how long it took to respond. These rows still show that the business responded, so removing them could affect our response-rate analysis. However, we were careful when using `response_delay_hours` because some values were not valid.
 
@@ -270,7 +270,7 @@ This prediction task is useful because it helps us understand what factors are r
 
 We use the F1-score as our main evaluation metric. The dataset is imbalanced because most reviews do not receive responses. In this case, accuracy alone can be misleading. A model may have high accuracy just by predicting the majority class. The F1-score is better because it balances precision and recall.
 
-At the time of prediction, we assume we know information that is available when the review is posted. These features include:
+At the time of prediction, we assume much of information columns are available when the review is posted. These features include:
 
 - `rating`
 - `review_hour`
@@ -278,6 +278,7 @@ At the time of prediction, we assume we know information that is available when 
 - `price_level`
 - `num_of_reviews`
 - `review_when_weekend`
+- `text`
 
 These features are appropriate because they are known before the business chooses whether to respond.
 
