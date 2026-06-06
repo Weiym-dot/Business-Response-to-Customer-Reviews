@@ -218,7 +218,7 @@ Because `num_of_reviews` was highly right-skewed, we used `log_num_reviews = log
 <iframe
   src="assets/Log Number of Reviews by Response Delay Missingness.html"
   width="800"
-  height="400"
+  height="420"
   frameborder="0"
 ></iframe> 
 We ran a permutation test by shuffling the missingness of rating for 1000 times to collect 1000 simulating mean differences in the two distributions as described in the test statistic.
