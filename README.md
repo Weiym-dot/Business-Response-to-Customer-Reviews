@@ -184,9 +184,14 @@ Alternative hypothesis: The distribution of review ratings is different for revi
   width="800"
   height="400"
   frameborder="0"
-></iframe>
-We used total variation distance, or TVD, as the test statistic. Since the p-value was less than 0.05, we rejected the null hypothesis. This suggests that the missingness of `response_delay_hours` depends on review rating.
-
+></iframe> 
+We used total variation distance, or TVD, as the test statistic. We found an observed TVD of 0.0475 which has a p value of 0.0. Since the p-value was less than 0.05, we rejected the null hypothesis. This suggests that the missingness of `response_delay_hours` depends on review rating.
+<iframe
+  src="assets/Permutation Distribution of TVD.html"
+  width="800"
+  height="400"
+  frameborder="0"
+></iframe> 
 ## Hypothesis Testing
 
 For our hypothesis test, we asked:
