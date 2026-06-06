@@ -130,6 +130,7 @@ We also compared business average rating and response behavior. This helped us s
 We also created grouped tables to summarize important patterns.
 
 One table grouped reviews by `main_category` and calculated the response rate and number of reviews for each category. This helped us see which business categories responded most often.
+
 | main_category                |     mean |   count |
 |:-----------------------------|---------:|--------:|
 | Land Rover dealer            | 1        |      15 |
@@ -146,7 +147,7 @@ One table grouped reviews by `main_category` and calculated the response rate an
 | Buick dealer                 | 0.906977 |      43 |
 | Pawn shop                    | 0.888889 |      27 |
 | Venezuelan restaurant        | 0.884615 |      26 |
-| Harley-Davidson dealer       | 0.853261 |     368|
+| Harley-Davidson dealer       | 0.853261 |     368 |
 
 Another table grouped reviews by `rating` and calculated response rate, median response delay, and number of reviews. This table was useful because it directly connected review rating to both parts of our research question: whether businesses respond and how quickly they respond.
 
