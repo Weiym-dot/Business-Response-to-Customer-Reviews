@@ -125,3 +125,25 @@ We also compared business average rating and response behavior. This helped us s
   height="400"
   frameborder="0"
 ></iframe>
+
+### Interesting Aggregates
+We also created grouped tables to summarize important patterns.
+
+One table grouped reviews by `main_category` and calculated the response rate and number of reviews for each category. This helped us see which business categories responded most often.
+| main_category                |     mean |   count |
+|:-----------------------------|---------:|--------:|
+| Land Rover dealer            | 1        |      15 |
+| Audi dealer                  | 1        |      30 |
+| Home inspector               | 1        |      32 |
+| Mexican torta restaurant     | 1        |      25 |
+| Mercedes-Benz dealer         | 1        |      22 |
+| Oral surgeon                 | 1        |      48 |
+| Car finance and loan company | 1        |      16 |
+| Auto market                  | 0.984615 |      65 |
+| Exercise equipment store     | 0.965517 |      58 |
+| Picture frame shop           | 0.928571 |      28 |
+| Fence contractor             | 0.923077 |      13 |
+| Buick dealer                 | 0.906977 |      43 |
+| Pawn shop                    | 0.888889 |      27 |
+| Venezuelan restaurant        | 0.884615 |      26 |
+| Harley-Davidson dealer       | 0.853261 |     368 |
