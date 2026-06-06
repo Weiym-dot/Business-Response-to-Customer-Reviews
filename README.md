@@ -63,3 +63,34 @@ To make the dataset easier to use, we cleaned and combined the review data with 
 First, we renamed `avg_rating` to `business_avg_rating` so it would not be confused with the customer review rating. Then, we kept only the columns that were useful for our question. From the review dataset, we kept columns such as `gmap_id`, `time`, `rating`, `text`, `resp`, and `pics`. From the business metadata, we kept columns such as `gmap_id`, `category`, `business_avg_rating`, `num_of_reviews`, `price`, and `state`.
 
 Next, we merged the two datasets using `gmap_id`. This allowed each review to also include information about the business it belonged to.
+
+We then created several new columns:
+
+- `has_response`: whether the `resp` column was missing or not.
+- `response_time_raw`: the raw response time from the response dictionary.
+- `response_text`: the written response from the business.
+- `review_datetime`: the review time converted into Hawaii time.
+- `response_datetime`: the response time converted into Hawaii time.
+- `response_delay_hours`: the time difference between the review and response.
+- `review_year`, `review_month`, `review_weekday`, and `review_hour`: time features based on when the review was posted.
+- `review_when_weekend`: whether the review was posted on Saturday or Sunday.
+- `has_text`: whether the review included text.
+- `has_pics`: whether the review included pictures.
+- `text_length`: the length of the review text.
+- `main_category`: the first listed business category.
+- `price_level`: the number of dollar signs in the price column.
+
+We found some rows where `response_delay_hours` was negative. This means the business response time happened before the review time, which does not make sense. This was probably caused by wrong timestamps or system errors. We did not remove these rows because our main goal is to study whether a business responded, not how long it took to respond. These rows still show that the business responded, so removing them could affect our response-rate analysis. However, we were careful when using `response_delay_hours` because some values were not valid.
+
+### Univariate Analysis
+
+In the univariate analysis, we looked at one variable at a time.
+
+First, we looked at the distribution of `has_response`. Most reviews did not receive a business response. This is important because it means the prediction problem is imbalanced.
+
+<iframe
+  src="assets/Distribution of has_reponse.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
