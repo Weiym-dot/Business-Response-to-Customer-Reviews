@@ -346,7 +346,7 @@ We used `RandomForestClassifier` as our model and use `GridSearchchCV` to tune t
 
 The final model was evaluated using the same training and testing split as the baseline model. Since the target variable has_response is somewhat imbalanced, we focus primarily on F1-score while also reporting accuracy.
 
-The final model achieved an accuracy of [INSERT FINAL ACCURACY] and an F1-score of [INSERT FINAL F1], compared to the baseline model's accuracy of 93.46% and F1-score of 0.358. The improvement in F1-score suggests that the additional features provide meaningful information about business response behavior and help the model better identify reviews that receive responses
+The final model achieved an accuracy of 94.25% and an F1-score of 0.408, improving upon the baseline model's accuracy of 93.46% and F1-score of 0.358. The improvement suggests that the engineered features contribute meaningful information about business response behavior and help the model better identify reviews that receive responses. However, the overall F1-score remains relatively modest, indicating that predicting business responses is a complex task influenced by many factors that are not available in the dataset. Therefore, while the final model performs better than the baseline model, there is still considerable room for future improvement.
 
 ## Fairness Analysis
 
@@ -371,16 +371,5 @@ Since the response variable (`has_response`) is imbalanced, we use **F1-score** 
 
 **Significance Level:** 0.05
 
-
-We performed the permutation test with 1000 trials. The result p-value is [PValue], which is [larger/shorter] than the 0.05 significant level. .
-
-We compare the observed difference to this distribution and compute a p-value.
-
-### Conclusion
-
-(Insert your actual p-value here.)
-
-If the p-value is less than 0.05, we reject the null hypothesis and conclude that the model performs differently across the two rating groups.
-
-If the p-value is greater than 0.05, we fail to reject the null hypothesis and conclude that there is insufficient evidence that the model performs differently for low-rating and high-rating reviews. Therefore, the model appears to be reasonably fair with respect to review ratings.
+**Conclusion:** We performed the permutation test with 1000 trials. The resulting p-value was 0.0, which is below our significance level of 0.05. Therefore, we reject the null hypothesis and conclude that the model's performance is significantly different across the two groups. This suggests that the model predicts responses for weekday and weekend reviews with different levels of effectiveness. One possible explanation is that businesses may exhibit different response behaviors depending on when reviews are posted, causing the patterns learned by the model to vary across these groups. As a result, the final model may not be equally fair for all review timing groups, and future work could explore additional features or modeling approaches to reduce this disparity.
 
