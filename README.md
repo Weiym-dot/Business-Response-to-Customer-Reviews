@@ -216,7 +216,7 @@ We ran a permutation test by shuffling the missingness of rating for 1000 times 
 ></iframe> 
 We used the absolute difference in mean `log_num_reviews` between the missing and observed groups as the test statistic. Since the p-value was less than 0.05, we rejected the null hypothesis. This suggests that response delay missingness depends on the number of reviews a business has.
 
-Together, these results suggest that the missingness of `response_delay_hours` is not MCAR, because it depends on observed columns in the dataset.
+We investigated whether the missingness of response_delay_hours depends on other observed variables. First, we tested whether missingness depends on review rating using a permutation test with TVD as the test statistic. Second, we tested whether missingness depends on the number of reviews associated with a business using a permutation test with difference in means on log-transformed review counts. If either test produces a small p-value, it provides evidence that the missingness of response_delay_hours depends on observed data and is therefore inconsistent with MCAR.
 
 ## Hypothesis Testing
 
@@ -231,7 +231,12 @@ Null hypothesis: The probability that a business responds is independent of revi
 Alternative hypothesis: Businesses are more likely to respond to low-rated reviews than high-rated reviews.
 
 Test statistic: The response rate for low-rated reviews minus the response rate for high-rated reviews.
-
+<iframe
+  src="assets/Permutation Distribution of Response Rate Difference.html"
+  width="800"
+  height="400"
+  frameborder="0"
+></iframe> 
 We used a permutation test to simulate the distribution of the test statistic under the null hypothesis. The p-value was 0.0, which is less than the significance level of 0.05. Therefore, we rejected the null hypothesis.
 
 This gives evidence that businesses respond to low-rated reviews more often than high-rated reviews. This result makes sense because low-rated reviews may hurt a business’s reputation, so businesses may be more motivated to respond to them.
