@@ -90,7 +90,7 @@ First, we looked at the distribution of `has_response`. Most reviews did not rec
 <iframe
   src="assets/Distribution of has_reponse.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 Next, we looked at `main_category` for reviews that received a response. The distribution of `main_category` shows what types of businesses appear most often in our dataset. Some categories have many more reviews than others. This means the dataset is not evenly spread across all business types. For example, common categories such as restaurants, hotels, or shopping places may appear more often because people are more likely to review them on Google Maps. This is important because our results may be influenced more by the larger categories.
@@ -114,14 +114,14 @@ In the bivariate analysis, we looked at relationships between two variables.
 One important relationship was between review rating and response rate. We compared the average value of `has_response` for each rating level. This helped us see whether businesses are more likely to respond to low-rated reviews or high-rated reviews.
 <iframe
   src="assets/Distribution of Response Rate by Review Rating.html"
-  width="700"
-  height="500"
+  width="800"
+  height="400"
   frameborder="0"
 ></iframe>
 We also compared business average rating and response behavior. This helped us see whether lower-rated businesses respond more often, possibly because they are trying to manage their reputation.
 <iframe
   src="assets/Business average rating vs response rate.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
