@@ -270,7 +270,7 @@ This prediction task is useful because it helps us understand what factors are r
 
 We use the F1-score as our main evaluation metric. The dataset is imbalanced because most reviews do not receive responses. In this case, accuracy alone can be misleading. A model may have high accuracy just by predicting the majority class. The F1-score is better because it balances precision and recall.
 
-At the time of prediction, we assume we know information that is available when the review is posted. These features include:
+At the time of prediction, we assume much of information columns are available when the review is posted. These features include:
 
 - `rating`
 - `review_hour`
@@ -278,6 +278,7 @@ At the time of prediction, we assume we know information that is available when 
 - `price_level`
 - `num_of_reviews`
 - `review_when_weekend`
+- `text`
 
 These features are appropriate because they are known before the business chooses whether to respond.
 
