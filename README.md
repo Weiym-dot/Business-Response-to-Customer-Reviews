@@ -114,8 +114,8 @@ In the bivariate analysis, we looked at relationships between two variables.
 One important relationship was between review rating and response rate. We compared the average value of `has_response` for each rating level. This helped us see whether businesses are more likely to respond to low-rated reviews or high-rated reviews.
 <iframe
   src="assets/Distribution of Response Rate by Review Rating.html"
-  width="800"
-  height="600"
+  width="600"
+  height="400"
   frameborder="0"
 ></iframe>
 We also compared business average rating and response behavior. This helped us see whether lower-rated businesses respond more often, possibly because they are trying to manage their reputation.
