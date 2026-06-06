@@ -346,6 +346,13 @@ We used `RandomForestClassifier` as our model and use `GridSearchchCV` to tune t
 
 The final model was evaluated using the same training and testing split as the baseline model. Since the target variable has_response is somewhat imbalanced, we focus primarily on F1-score while also reporting accuracy.
 
+<iframe
+  src="assets/confusion_matrix.html"
+  width="800"
+  height="420"
+  frameborder="0"
+></iframe> 
+
 The final model achieved an accuracy of 94.25% and an F1-score of 0.408, improving upon the baseline model's accuracy of 93.46% and F1-score of 0.358. The improvement suggests that the engineered features contribute meaningful information about business response behavior and help the model better identify reviews that receive responses. However, the overall F1-score remains relatively modest, indicating that predicting business responses is a complex task influenced by many factors that are not available in the dataset. Therefore, while the final model performs better than the baseline model, there is still considerable room for future improvement.
 
 ## Fairness Analysis
