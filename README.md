@@ -97,14 +97,14 @@ Next, we looked at `main_category` for reviews that received a response. The dis
 <iframe
   src="assets/Distribution of Main Category.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 We also looked at the distribution of customer `rating`. Most reviews had high ratings, especially 5-star reviews. This matters because businesses may respond differently to very positive reviews compared to very negative reviews.
 <iframe
   src="assets/Distribution of ratings.html"
   width="800"
-  height="600"
+  height="400"
   frameborder="0"
 ></iframe>
 
